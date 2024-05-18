@@ -1,4 +1,4 @@
-package com.example.qrcode_bloc
+package com.example.qr
 
 import io.flutter.embedding.android.FlutterActivity
 
