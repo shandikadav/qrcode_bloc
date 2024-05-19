@@ -11,32 +11,17 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home Page'),
       ),
-      body: BlocConsumer<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthStateLogout) {
-            context.goNamed(RouteNames.login);
-          }
-        },
-        builder: (context, state) {
-          if (state is AuthStateLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is AuthStateError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                duration: const Duration(seconds: 2),
-              ),
-            );
-          }
-          return const Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('You are logged in'),
-              ],
-            ),
+      body: GridView.builder(
+        padding: const EdgeInsets.all(20),
+        itemCount: 4,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
+        ),
+        itemBuilder: (context, index) {
+          return Container(
+            color: Colors.amber,
           );
         },
       ),
