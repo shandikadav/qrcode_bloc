@@ -20,8 +20,61 @@ class HomePage extends StatelessWidget {
           crossAxisSpacing: 20,
         ),
         itemBuilder: (context, index) {
-          return Container(
-            color: Colors.amber,
+          late String title;
+          late IconData icon;
+          late VoidCallback onTap;
+
+          switch (index) {
+            case 0:
+              title = 'Add Product';
+              icon = Icons.post_add_rounded;
+              onTap = () => context.goNamed(RouteNames.addProduct);
+              break;
+            case 1:
+              title = 'Product';
+              icon = Icons.list_alt_outlined;
+              onTap = () {};
+              break;
+            case 2:
+              title = 'QR Code';
+              icon = Icons.qr_code;
+              onTap = () {};
+              break;
+            case 3:
+              title = 'Catalog';
+              icon = Icons.document_scanner_outlined;
+              onTap = () {};
+              break;
+            default:
+          }
+
+          return Material(
+            color: Colors.grey.shade300,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(9.0),
+              onTap: onTap,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 50,
+                      width: 50,
+                      child: Icon(
+                        icon,
+                        size: 50,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      title,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           );
         },
       ),

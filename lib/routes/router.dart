@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:qrcode_bloc/pages/add_product.dart';
 import 'package:qrcode_bloc/pages/home.dart';
 import 'package:qrcode_bloc/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,10 +23,16 @@ final router = GoRouter(
   },
   routes: [
     GoRoute(
-      path: '/',
-      name: RouteNames.home,
-      builder: (context, state) => const HomePage(),
-    ),
+        path: '/',
+        name: RouteNames.home,
+        builder: (context, state) => const HomePage(),
+        routes: [
+          GoRoute(
+            path: 'add-product',
+            name: RouteNames.addProduct,
+            builder: (context, state) => const AddProductPage(),
+          )
+        ]),
     GoRoute(
       path: '/login',
       name: RouteNames.login,
