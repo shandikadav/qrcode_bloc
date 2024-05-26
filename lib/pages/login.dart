@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qrcode_bloc/bloc/auth/auth_bloc.dart';
+import 'package:qrcode_bloc/bloc/bloc.dart';
 import 'package:qrcode_bloc/routes/router.dart';
 
 class LoginPage extends StatelessWidget {
@@ -73,12 +73,6 @@ class LoginPage extends StatelessWidget {
           ),
           const SizedBox(
             height: 20,
-          ),
-          TextButton(
-            onPressed: () {
-              context.go(RouteNames.register);
-            },
-            child: Text('Register'),
           ),
         ],
       ),

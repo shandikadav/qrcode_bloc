@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qrcode_bloc/bloc/product/product_bloc.dart';
 
 class AddProductPage extends StatelessWidget {
   AddProductPage({super.key});
@@ -58,8 +60,40 @@ class AddProductPage extends StatelessWidget {
             height: 20,
           ),
           ElevatedButton(
-            onPressed: () {},
-            child: const Text('Add Product'),
+            onPressed: () {
+              context.read<ProductBloc>().add(
+                    ProductEventAddProduct(
+                      code: codeController.text,
+                      name: nameController.text,
+                      qty: int.tryParse(qtyController.text) ?? 0,
+                    ),
+                  );
+            },
+            child: BlocConsumer<ProductBloc, ProductState>(
+              listener: (context, state) {
+                if (state is ProductStateError) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(state.message),
+                      duration: const Duration(seconds: 2),
+                    ),
+                  );
+                } else if (state is ProductStateComplete) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Product added'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                  Navigator.pop(context);
+                }
+              },
+              builder: (context, state) {
+                return Text(
+                  (state is ProductStateLoading) ? 'Loading...' : 'Add Product',
+                );
+              },
+            ),
           ),
         ],
       ),

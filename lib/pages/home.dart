@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qrcode_bloc/bloc/auth/auth_bloc.dart';
+import 'package:qrcode_bloc/bloc/bloc.dart';
 import 'package:qrcode_bloc/routes/router.dart';
 
 class HomePage extends StatelessWidget {
@@ -81,6 +81,7 @@ class HomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           context.read<AuthBloc>().add(AuthEventLogout());
+          context.goNamed(RouteNames.login);
         },
         child: const Icon(Icons.logout_outlined),
       ),
